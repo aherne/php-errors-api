@@ -9,9 +9,9 @@ class PHPException extends Exception {
 	/**
 	 * Class name to which error handling will be delegated.
 	 * 
-	 * @var string $strErrorHandlerClass
+	 * @var ErrorHandler $strErrorHandlerClass
 	 */
-	protected static $strErrorHandlerClassName;
+	protected static $objErrorHandler;
 	
 
 	/**
@@ -19,8 +19,8 @@ class PHPException extends Exception {
 	 * 
 	 * @param string $strClassName
 	 */
-	public static function setErrorHandler($strClassName) {
-		self::$strErrorHandlerClassName = $strClassName;
+	public static function setErrorHandler(ErrorHandler $objErrorHandler) {
+		self::$objErrorHandler = $objErrorHandler;
 	}
 	
 	/**
@@ -35,7 +35,7 @@ class PHPException extends Exception {
 		$e = new self($strMessage, $intErrorNumber);
 		$e->line = $intLine;
 	    $e->file = $strFile;
-	    new self::$strErrorHandlerClassName($e);
+	    self::$objErrorHandler->handle($e);
 	   	die(); // prevents double-reporting if exception is caught
 	}
 	
@@ -48,7 +48,7 @@ class PHPException extends Exception {
 			$e = new self($tblError['message'],0);
 			$e->line = $tblError['line'];
 			$e->file = $tblError['file'];
-	        new self::$strErrorHandlerClassName($e);
+			self::$objErrorHandler->handle($e);
 		}
 	}
 }
