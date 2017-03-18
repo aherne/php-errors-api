@@ -1,30 +1,30 @@
 <?php
-require_once("ErrorDisplay.php");
-require_once("ErrorStore.php");
+require_once("ErrorRenderer.php");
+require_once("ErrorReporter.php");
 
 /**
  * Single point of entry for all uncaught errors inside application (incl. PHP errors)
  */
 class ErrorHandler {
-	private $storageMethods=array();
-	private $displayMethod;
+	private $reporters=array();
+	private $renderer;
 	
 	/**
 	 * Registers a storage medium for errors to be recorded into.
 	 * 
-	 * @param ErrorStore $storageMethod Performs storage of error (eg: in logs or in database)
+	 * @param ErrorReporter $reporter Performs storage of error (eg: in logs or in database)
 	 */
-	public function addStorage(ErrorStore $storageMethod) {
-		$this->storageMethods[] = $storageMethod;
+	public function addStorage(ErrorReporter $reporter) {
+		$this->reporters[] = $reporter;
 	}
 	
 	/**
 	 * Registers an error display mechanism
 	 * 
-	 * @param ErrorDisplay $displayMethod Defines what clients will see while encountering an error. 
+	 * @param ErrorRenderer $renderer Defines what clients will see while encountering an error. 
 	 */
-	public function setDisplay(ErrorDisplay $displayMethod) {
-		$this->displayMethod = $displayMethod;
+	public function setDisplay(ErrorRenderer $renderer) {
+		$this->renderer = $renderer;
 	}
 	
 	/**
@@ -33,11 +33,11 @@ class ErrorHandler {
 	 * @param Exception $e Encapsulates error information.
 	 */
 	public function handle(Exception $e) {
-		foreach($this->storageMethods as $method) {
-			$method->store($e);	
+		foreach($this->reporters as $reporter) {
+			$reporter->report($e);	
 		}
-		if($this->displayMethod) {
-			$this->displayMethod->display($e);
+		if($this->renderer) {
+			$this->renderer->render($e);
 		}
 	}
 }
