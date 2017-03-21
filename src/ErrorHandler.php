@@ -14,7 +14,7 @@ class ErrorHandler {
 	 * 
 	 * @param ErrorReporter $reporter Performs storage of error (eg: in logs or in database)
 	 */
-	public function addStorage(ErrorReporter $reporter) {
+	public function addReporter(ErrorReporter $reporter) {
 		$this->reporters[] = $reporter;
 	}
 	
@@ -23,7 +23,7 @@ class ErrorHandler {
 	 * 
 	 * @param ErrorRenderer $renderer Defines what clients will see while encountering an error. 
 	 */
-	public function setDisplay(ErrorRenderer $renderer) {
+	public function setRenderer(ErrorRenderer $renderer) {
 		$this->renderer = $renderer;
 	}
 	
