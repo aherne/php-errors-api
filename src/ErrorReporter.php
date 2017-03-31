@@ -6,7 +6,7 @@ interface ErrorReporter {
 	/**
 	 * Reports error to a storage medium.
 	 * 
-	 * @param Exception $exception
+	 * @param Exception|Throwable $exception
 	 */
-	function report(Exception $exception);
+	function report($exception);
 }

@@ -30,9 +30,9 @@ class ErrorHandler {
 	/**
 	 * Handles errors by delegating to registered storage mediums (if any) then output using display method (if any)
 	 * 
-	 * @param Exception $e Encapsulates error information.
+	 * @param Exception|Throwable $e Encapsulates error information.
 	 */
-	public function handle(Exception $e) {
+	public function handle($e) {
 		foreach($this->reporters as $reporter) {
 			$reporter->report($e);	
 		}

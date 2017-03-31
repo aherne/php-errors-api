@@ -6,7 +6,7 @@ interface ErrorRenderer {
 	/**
 	 * Renders error to screen.
 	 * 
-	 * @param Exception $exception
+	 * @param Exception|Throwable $exception
 	 */
-	function render(Exception $exception);
+	function render($exception);
 }
