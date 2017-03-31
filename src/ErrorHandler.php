@@ -23,7 +23,7 @@ class ErrorHandler {
 	 * 
 	 * @param ErrorRenderer $renderer Defines what clients will see while encountering an error. 
 	 */
-	public function setRenderer(ErrorRenderer $renderer) {
+	public function setRenderer(ErrorRenderer $renderer = null) {
 		$this->renderer = $renderer;
 	}
 	
