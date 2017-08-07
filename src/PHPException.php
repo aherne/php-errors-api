@@ -35,6 +35,7 @@ class PHPException extends Exception {
 		$e = new self($strMessage, $intErrorNumber);
 		$e->line = $intLine;
 	    $e->file = $strFile;
+	    if(!self::$objErrorHandler) die($strMessage);
 	    self::$objErrorHandler->handle($e);
 	   	die(); // prevents double-reporting if exception is caught
 	}
@@ -48,6 +49,7 @@ class PHPException extends Exception {
 			$e = new self($tblError['message'],0);
 			$e->line = $tblError['line'];
 			$e->file = $tblError['file'];
+			if(!self::$objErrorHandler) die($tblError['message']);
 			self::$objErrorHandler->handle($e);
 		}
 	}
