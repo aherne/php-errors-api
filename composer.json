@@ -1,0 +1,15 @@
+{
+    "name": "lucinda/errors",
+    "type": "library",
+    "description": "Bootstraps errors and handles them via reporters and renderers",
+    "keywords": ["errors","handler","reporter","renderer","aop","aspect oriented programming"],
+    "homepage": "http://www.lucinda-framework.com/errors-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lucian Popescu",
+            "email": "lucian.gabriel.popescu@gmail.com",
+            "role": "Developer"
+        }
+    ]
+}
