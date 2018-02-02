@@ -7,20 +7,29 @@ error_reporting(E_ALL);
 class PHPException extends Exception {
 	
 	/**
-	 * Class name to which error handling will be delegated.
+	 * Object to which error handling will be delegated to.
 	 * 
-	 * @var ErrorHandler $strErrorHandlerClass
+	 * @var ErrorHandler $objErrorHandler
 	 */
 	protected static $objErrorHandler;
 	
 
 	/**
-	 * Sets name of class to which error handling will be delegated.
+	 * Sets object to which error handling will be delegated to.
 	 * 
-	 * @param string $strClassName
+	 * @param ErrorHandler $objErrorHandler
 	 */
 	public static function setErrorHandler(ErrorHandler $objErrorHandler) {
 		self::$objErrorHandler = $objErrorHandler;
+	}
+
+	/**
+	 * Gets object to which error handling are delegated to. 
+	 * 
+	 * @return ErrorHandler
+	 */
+	public static function getErrorHandler() {
+		return self::$objErrorHandler;
 	}
 	
 	/**
