@@ -54,7 +54,7 @@ class PHPException extends Exception {
 	 */
 	public static function fatalError() {
 		$error = error_get_last();
-		if(sizeof($error)) {
+		if($error!==NULL) {
 			$e = new self($error['message'],0);
 			$e->line = $error['line'];
 			$e->file = $error['file'];
